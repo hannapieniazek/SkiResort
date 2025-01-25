@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="windows-1250" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.bp.org/types"
+            targetNamespace="http://www.bp.org/types"
+            elementFormDefault="qualified">
+    <xsd:complexType name="SkiPass">
+        <xsd:sequence>
+            <xsd:element name="type" type="xsd:string"/> <!-- Normal or Kids -->
+            <xsd:element name="duration" type="xsd:string"/> <!-- E.g., 1 Hour, 1 Day -->
+            <xsd:element name="price" type="xsd:decimal"/> <!-- Price of the ski pass -->
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="SkiEquipment">
+        <xsd:sequence>
+            <xsd:element name="equipmentType" type="xsd:string"/> <!-- E.g., Skis, Snowboard -->
+            <xsd:element name="rentalDuration" type="xsd:string"/> <!-- E.g., 1 Hour, 1 Day -->
+            <xsd:element name="price" type="xsd:decimal"/> <!-- Rental price -->
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PaymentCard">
+        <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="validTo" type="xsd:string"/>
+            <xsd:element name="number" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Person">
+        <xsd:sequence>
+            <xsd:element name="firstName" type="xsd:string"/>
+            <xsd:element name="lastName" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="BookingInfo">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+            <xsd:element name="cost" type="xsd:decimal"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Fault">
+        <xsd:sequence>
+            <xsd:element name="code" type="xsd:int"/>
+            <xsd:element name="text" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Result of Ski Pass Purchase</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Result</h1>
+<p th:text="'Booking ID: ' + ${bookingInfo.id}" />
+<p th:text="'Cost: ' + ${bookingInfo.cost}" />
+<a href="/buySkiPass">Buy another Ski Pass</a>
+</body>
+</html>

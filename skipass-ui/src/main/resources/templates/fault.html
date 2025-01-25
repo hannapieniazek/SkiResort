@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Błąd SOAP</title>
+</head>
+<body>
+<h1>Wystąpił błąd</h1>
+<p><strong>Opis błędu:</strong> <span th:text="${faultMessage}"></span></p>
+<p><strong>Kod błędu:</strong> <span th:text="${faultCode}"></span></p>
+<p><a href="/" th:href="@{/}">Powrót do strony głównej</a></p>
+</body>
+</html>

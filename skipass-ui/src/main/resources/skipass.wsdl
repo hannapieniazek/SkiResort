@@ -1,0 +1,35 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://skipass.bp.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://www.bp.org/skipass/" name="SkiPassPurchaseEndpointService" targetNamespace="http://skipass.bp.org/">
+    <wsdl:import location="http://localhost:8080/soap-api/service/skipass?wsdl=SkiPassPurchase.wsdl" namespace="http://www.bp.org/skipass/"> </wsdl:import>
+    <wsdl:binding name="SkiPassPurchaseEndpointServiceSoapBinding" type="ns1:SkiPassPurchase">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="buySkiPass">
+            <soap:operation soapAction="http://www.bp.org/skipass/buySkiPass" style="document"/>
+            <wsdl:input name="buySkiPass">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="buySkiPassResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SkiPassFaultMsg">
+                <soap:fault name="SkiPassFaultMsg" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="cancelPurchase">
+            <soap:operation soapAction="http://www.bp.org/skipass/cancelPurchase" style="document"/>
+            <wsdl:input name="cancelPurchase">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="cancelPurchaseResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SkiPassFaultMsg">
+                <soap:fault name="SkiPassFaultMsg" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SkiPassPurchaseEndpointService">
+        <wsdl:port binding="tns:SkiPassPurchaseEndpointServiceSoapBinding" name="SkiPassPurchaseEndpointPort">
+            <soap:address location="http://localhost:8080/soap-api/service/skipass"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

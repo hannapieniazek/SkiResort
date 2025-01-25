@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Ski Pass Purchase</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Buy Ski Pass</h1>
+<form th:action="@{/buySkiPass}" th:object="${buySkiPassRequest}" method="post">
+    <label for="type">Typ:</label>
+    <select id="type" th:field="*{skiPass.type}" required>
+        <option value="NORMAL">Normalny</option>
+        <option value="DISCOUNTED">Ulgowy</option>
+    </select>
+    <label for="duration">Ważność:</label>
+    <select id="duration" th:field="*{skiPass.duration}" required>
+        <option value="1 godzina">1 godzina</option>
+        <option value="2 godziny">2 godziny</option>
+        <option value="3 godziny">3 godziny</option>
+        <option value="5 godzin">5 godzin</option>
+        <option value="1 dzień">1 dzień</option>
+        <option value="3 dni">3 dni</option>
+        <option value="5 dni">5 dni</option>
+        <option value="1 tydzień">1 tydzień</option>
+        <option value="2 tygodnie">2 tygodnie</option>
+    </select>
+
+    <p>Person First Name: <input type="text" th:field="*{person.firstName}" /></p>
+    <p>Person Last Name: <input type="text" th:field="*{person.lastName}" /></p>
+    <p>
+        <input type="submit" value="Submit" />
+        <input type="reset" value="Reset" />
+    </p>
+</form>
+</body>
+</html>
