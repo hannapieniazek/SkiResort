@@ -51,6 +51,10 @@ public class SkiPassPurchaseController {
             return "result";
         } catch (SkiPassFaultMsg e) {
             System.out.println("Expected exception: SkiPassFaultMsg has occured.");
+            String faultCode = String.valueOf(e.getFaultInfo().getCode());
+            String faultMessage = e.getFaultInfo().getText();
+            model.addAttribute("faultCode", faultCode);
+            model.addAttribute("faultMessage", faultMessage);
             model.addAttribute("skiPassFaultMsg", e);
             System.out.println("Fault details: " + e.getMessage());
             System.out.println("Fault Code: " + e.getFaultInfo().getCode());

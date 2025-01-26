@@ -21,6 +21,14 @@ public class SkiPassPurchaseEndpoint implements SkiPassPurchase {
             fault.setText("Invalid request: person or ski pass details are missing.");
             throw new SkiPassFaultMsg("Invalid request", fault);
         }
+        String firstName = payload.getPerson().getFirstName();
+        String lastName = payload.getPerson().getLastName();
+        if (!isValidName(firstName) || !isValidName(lastName)) {
+            Fault fault = new Fault();
+            fault.setCode(400);
+            fault.setText("Invalid name: First name and last name must contain only letters and spaces.");
+            throw new SkiPassFaultMsg("Validation error", fault);
+        }
 
         SkiPass skiPass = payload.getSkiPass();
         String validity = skiPass.getDuration();
@@ -92,5 +100,9 @@ public class SkiPassPurchaseEndpoint implements SkiPassPurchase {
         }
 
         return basePrice;
+    }
+
+    private boolean isValidName(String name) {
+        return name != null && name.matches("[a-zA-Z ]+");
     }
 }
