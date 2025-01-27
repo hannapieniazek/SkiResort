@@ -1,0 +1,154 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://skiequipment.bp.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="SkiEquipmentServiceService" targetNamespace="http://skiequipment.bp.org/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://skiequipment.bp.org/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://skiequipment.bp.org/">
+            <xs:element name="calculateRentalCost" type="tns:calculateRentalCost"/>
+            <xs:element name="calculateRentalCostResponse" type="tns:calculateRentalCostResponse"/>
+            <xs:element name="cancelBooking" type="tns:cancelBooking"/>
+            <xs:element name="cancelBookingResponse" type="tns:cancelBookingResponse"/>
+            <xs:element name="rentSkiEquipment" type="tns:rentSkiEquipment"/>
+            <xs:element name="rentSkiEquipmentResponse" type="tns:rentSkiEquipmentResponse"/>
+            <xs:complexType name="calculateRentalCost">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+                    <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="calculateRentalCostResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="rentSkiEquipment">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:skiEquipmentRental"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="skiEquipmentRental">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="person" type="tns:person"/>
+                    <xs:element minOccurs="0" name="skiEquipment" type="tns:skiEquipment"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="person">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="skiEquipment">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="equipmentType" type="xs:string"/>
+                    <xs:element minOccurs="0" name="price" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="rentalDuration" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="rentSkiEquipmentResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:bookingInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="bookingInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="cost" type="xs:decimal"/>
+                    <xs:element name="id" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="cancelBooking">
+                <xs:sequence>
+                    <xs:element name="arg0" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="cancelBookingResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:bookingInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="Fault" type="tns:Fault"/>
+            <xs:complexType name="Fault">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="code" type="xs:int"/>
+                    <xs:element minOccurs="0" name="text" type="xs:string"/>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="cancelBookingResponse">
+        <wsdl:part element="tns:cancelBookingResponse" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="Fault">
+        <wsdl:part element="tns:Fault" name="Fault"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="rentSkiEquipment">
+        <wsdl:part element="tns:rentSkiEquipment" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="rentSkiEquipmentResponse">
+        <wsdl:part element="tns:rentSkiEquipmentResponse" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="calculateRentalCostResponse">
+        <wsdl:part element="tns:calculateRentalCostResponse" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="calculateRentalCost">
+        <wsdl:part element="tns:calculateRentalCost" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="cancelBooking">
+        <wsdl:part element="tns:cancelBooking" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="SkiEquipmentService">
+        <wsdl:operation name="calculateRentalCost">
+            <wsdl:input message="tns:calculateRentalCost" name="calculateRentalCost"> </wsdl:input>
+            <wsdl:output message="tns:calculateRentalCostResponse" name="calculateRentalCostResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rentSkiEquipment">
+            <wsdl:input message="tns:rentSkiEquipment" name="rentSkiEquipment"> </wsdl:input>
+            <wsdl:output message="tns:rentSkiEquipmentResponse" name="rentSkiEquipmentResponse"> </wsdl:output>
+            <wsdl:fault message="tns:Fault" name="Fault"> </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="cancelBooking">
+            <wsdl:input message="tns:cancelBooking" name="cancelBooking"> </wsdl:input>
+            <wsdl:output message="tns:cancelBookingResponse" name="cancelBookingResponse"> </wsdl:output>
+            <wsdl:fault message="tns:Fault" name="Fault"> </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SkiEquipmentServiceServiceSoapBinding" type="tns:SkiEquipmentService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="calculateRentalCost">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="calculateRentalCost">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="calculateRentalCostResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rentSkiEquipment">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="rentSkiEquipment">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="rentSkiEquipmentResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Fault">
+                <soap:fault name="Fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="cancelBooking">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="cancelBooking">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="cancelBookingResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Fault">
+                <soap:fault name="Fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SkiEquipmentServiceService">
+        <wsdl:port binding="tns:SkiEquipmentServiceServiceSoapBinding" name="SkiEquipmentServicePort">
+            <soap:address location="http://localhost:8081/soap-api/service/skiequipment"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

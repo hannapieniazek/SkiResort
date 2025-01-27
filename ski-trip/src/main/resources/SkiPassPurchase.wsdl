@@ -1,0 +1,98 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns2="http://www.bp.org" xmlns:ns1="http://www.bp.org/skipass/" name="SkiPassPurchase" targetNamespace="http://www.bp.org/skipass/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.bp.org/types" elementFormDefault="qualified" targetNamespace="http://www.bp.org/types" version="1.0">
+            <xs:complexType name="Person">
+                <xs:sequence>
+                    <xs:element name="firstName" type="xs:string"/>
+                    <xs:element name="lastName" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SkiPass">
+                <xs:sequence>
+                    <xs:element name="type" type="xs:string"/>
+                    <xs:element name="duration" type="xs:string"/>
+                    <xs:element name="price" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="BookingInfo">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:int"/>
+                    <xs:element name="cost" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Fault">
+                <xs:sequence>
+                    <xs:element name="code" type="xs:int"/>
+                    <xs:element name="text" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="PaymentCard">
+                <xs:sequence>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="validTo" type="xs:string"/>
+                    <xs:element name="number" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SkiEquipment">
+                <xs:sequence>
+                    <xs:element name="equipmentType" type="xs:string"/>
+                    <xs:element name="rentalDuration" type="xs:string"/>
+                    <xs:element name="price" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SkiEquipmentRental">
+                <xs:sequence>
+                    <xs:element name="skiEquipment" type="tns:SkiEquipment"/>
+                    <xs:element name="person" type="tns:Person"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.bp.org/types" elementFormDefault="qualified" targetNamespace="http://www.bp.org" version="1.0">
+            <xs:import namespace="http://www.bp.org/types"/>
+            <xs:element name="buySkiPassRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="person" type="ns1:Person"/>
+                        <xs:element name="skiPass" type="ns1:SkiPass"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="buySkiPassResponse" type="ns1:BookingInfo"/>
+            <xs:element name="cancelPurchaseRequest">
+                <xs:complexType>
+                    <xs:sequence/>
+                    <xs:attribute name="bookingId" type="xs:int"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="cancelPurchaseResponse" type="ns1:BookingInfo"/>
+            <xs:element name="skiPassFault" type="ns1:Fault"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="buySkiPassResponse">
+        <wsdl:part element="ns2:buySkiPassResponse" name="payload"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="buySkiPass">
+        <wsdl:part element="ns2:buySkiPassRequest" name="payload"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="cancelPurchase">
+        <wsdl:part element="ns2:cancelPurchaseRequest" name="payload"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="SkiPassFaultMsg">
+        <wsdl:part element="ns2:skiPassFault" name="SkiPassFaultMsg"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="cancelPurchaseResponse">
+        <wsdl:part element="ns2:cancelPurchaseResponse" name="payload"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="SkiPassPurchase">
+        <wsdl:operation name="buySkiPass">
+            <wsdl:input message="ns1:buySkiPass" name="buySkiPass"> </wsdl:input>
+            <wsdl:output message="ns1:buySkiPassResponse" name="buySkiPassResponse"> </wsdl:output>
+            <wsdl:fault message="ns1:SkiPassFaultMsg" name="SkiPassFaultMsg"> </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="cancelPurchase">
+            <wsdl:input message="ns1:cancelPurchase" name="cancelPurchase"> </wsdl:input>
+            <wsdl:output message="ns1:cancelPurchaseResponse" name="cancelPurchaseResponse"> </wsdl:output>
+            <wsdl:fault message="ns1:SkiPassFaultMsg" name="SkiPassFaultMsg"> </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>
