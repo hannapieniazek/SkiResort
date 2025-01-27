@@ -14,6 +14,9 @@ public class SkiEquipment {
         this.price = price;
     }
 
+    public SkiEquipment() {
+    }
+
     public String getEquipmentType() {
         return equipmentType;
     }

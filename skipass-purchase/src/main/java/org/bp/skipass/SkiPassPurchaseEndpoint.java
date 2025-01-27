@@ -65,31 +65,31 @@ public class SkiPassPurchaseEndpoint implements SkiPassPurchase {
     public BigDecimal calculateSkiPassCost(String duration, String type) {
         BigDecimal basePrice;
         switch (duration) {
-            case "1 godzina":
+            case "1 hour":
                 basePrice = new BigDecimal("30");
                 break;
-            case "2 godziny":
+            case "2 hours":
                 basePrice = new BigDecimal("50");
                 break;
-            case "3 godziny":
+            case "3 hours":
                 basePrice = new BigDecimal("70");
                 break;
-            case "5 godzin":
+            case "5 hours":
                 basePrice = new BigDecimal("100");
                 break;
-            case "1 dzień":
+            case "1 day":
                 basePrice = new BigDecimal("150");
                 break;
-            case "3 dni":
+            case "3 days":
                 basePrice = new BigDecimal("400");
                 break;
-            case "5 dni":
+            case "5 days":
                 basePrice = new BigDecimal("600");
                 break;
-            case "1 tydzień":
+            case "1 week":
                 basePrice = new BigDecimal("1000");
                 break;
-            case "2 tygodnie":
+            case "2 weeks":
                 basePrice = new BigDecimal("1800");
                 break;
             default:

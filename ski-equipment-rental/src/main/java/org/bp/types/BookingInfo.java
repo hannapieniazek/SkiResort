@@ -6,6 +6,14 @@ public class BookingInfo {
 
     protected int id;
     protected BigDecimal cost;
+	public BookingInfo(int id, BigDecimal cost){
+		this.id = id;
+		this.cost = cost;
+	}
+	public BookingInfo(){
+		this.id = id;
+		this.cost = cost;
+	}
 	public int getId() {
 		return id;
 	}

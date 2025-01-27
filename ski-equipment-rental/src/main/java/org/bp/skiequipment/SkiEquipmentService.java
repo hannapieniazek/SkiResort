@@ -1,8 +1,6 @@
 package org.bp.skiequipment;
 
-import org.bp.types.BookingInfo;
-import org.bp.types.Fault;
-import org.bp.types.SkiEquipment;
+import org.bp.types.*;
 
 import java.math.BigDecimal;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -10,16 +8,25 @@ import java.util.concurrent.atomic.AtomicInteger;
 @javax.jws.WebService
 @org.springframework.stereotype.Service
 public class SkiEquipmentService {
-    public BookingInfo rentSkiEquipment(SkiEquipment skiEquipment) throws Fault {
-//        BigDecimal calculatedPrice = calculateRentalCost(equipmentType, rentalDuration);
-//
-//        SkiEquipment skiEquipment = new SkiEquipment(equipmentType, rentalDuration, calculatedPrice);
+    public BookingInfo rentSkiEquipment(SkiEquipmentRental skiEquipmentRental) throws Fault {
+        SkiEquipment skiEquipment = skiEquipmentRental.getSkiEquipment();
+        Person person = skiEquipmentRental.getPerson();
+
+        if (skiEquipment == null || person == null) {
+            throw new Fault(400, "Invalid rental request: SkiEquipment or Person is missing.");
+        }
+
+        String equipmentType = skiEquipment.getEquipmentType();
+        String rentalDuration = skiEquipment.getRentalDuration();
+        BigDecimal calculatedPrice = calculateRentalCost(equipmentType, rentalDuration);
+
+        skiEquipment.setPrice(calculatedPrice);
 
         BookingInfo bookingInfo = new BookingInfo();
         bookingInfo.setId(generateUniqueId());
-        bookingInfo.setCost(new java.math.BigDecimal(345));
-        return bookingInfo;
+        bookingInfo.setCost(calculatedPrice);
 
+        return bookingInfo;
     }
 
     public BookingInfo cancelBooking(int bookingId)  throws Fault {
@@ -56,19 +63,19 @@ public class SkiEquipmentService {
         }
 
         switch (rentalDuration) {
-            case "1 dzień":
+            case "1 day":
                 basePrice = basePrice.multiply(new BigDecimal("1"));
                 break;
-            case "2 dni":
+            case "2 days":
                 basePrice = basePrice.multiply(new BigDecimal("1.8"));
                 break;
-            case "3 dni":
+            case "3 days":
                 basePrice = basePrice.multiply(new BigDecimal("2.5"));
                 break;
-            case "1 tydzień":
+            case "1 week":
                 basePrice = basePrice.multiply(new BigDecimal("5"));
                 break;
-            case "2 tygodnie":
+            case "2 weeks":
                 basePrice = basePrice.multiply(new BigDecimal("9"));
                 break;
             default:

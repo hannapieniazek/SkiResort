@@ -7,22 +7,22 @@
 <body>
 <h1>Buy Ski Pass</h1>
 <form th:action="@{/buySkiPass}" th:object="${buySkiPassRequest}" method="post">
-    <label for="type">Typ:</label>
+    <label for="type">Type:</label>
     <select id="type" th:field="*{skiPass.type}" required>
-        <option value="NORMAL">Normalny</option>
-        <option value="DISCOUNTED">Ulgowy</option>
+        <option value="NORMAL">Normal</option>
+        <option value="DISCOUNTED">Discounted</option>
     </select>
-    <label for="duration">Ważność:</label>
+    <label for="duration">Duration:</label>
     <select id="duration" th:field="*{skiPass.duration}" required>
-        <option value="1 godzina">1 godzina</option>
-        <option value="2 godziny">2 godziny</option>
-        <option value="3 godziny">3 godziny</option>
-        <option value="5 godzin">5 godzin</option>
-        <option value="1 dzień">1 dzień</option>
-        <option value="3 dni">3 dni</option>
-        <option value="5 dni">5 dni</option>
-        <option value="1 tydzień">1 tydzień</option>
-        <option value="2 tygodnie">2 tygodnie</option>
+        <option value="1 hour">1 hour</option>
+        <option value="2 hours">2 hours</option>
+        <option value="3 hours">3 hours</option>
+        <option value="5 hours">5 hours</option>
+        <option value="1 day">1 day</option>
+        <option value="3 days">3 days</option>
+        <option value="5 days">5 days</option>
+        <option value="1 week">1 week</option>
+        <option value="2 weeks">2 weeks</option>
     </select>
 
     <p>Person First Name: <input type="text" th:field="*{person.firstName}" /></p>
