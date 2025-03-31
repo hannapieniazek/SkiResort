@@ -1,0 +1,118 @@
+openapi: 3.0.1
+info:
+  title: Ski trip micro service
+  description: Micro service to book a ski trip
+  contact:
+    email: supportm@bp.org
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: http://localhost:8090
+tags:
+  - name: skitrip
+    description: Ski trip which you can book
+paths:
+  /skitrip:
+    post:
+      tags:
+        - skitrip
+      summary: Booking of a ski trip
+      operationId: bookTrip
+      requestBody:
+        description: Details of ski trip which you are booking
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookTripRequest'
+        required: true
+      responses:
+        400:
+          description: Problem during processing of the booking
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+
+components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+    SkiPass:
+      type: object
+      properties:
+        type:
+          type: string
+        duration:
+          type: string
+        price:
+          type: number
+    BookingInfo:
+      type: object
+      properties:
+        id:
+          type: string
+        cost:
+          type: number
+    SkiEquipment:
+      type: object
+      properties:
+        equipmentType:
+          type: string
+        rentalDuration:
+          type: string
+        price:
+          type: number
+    SkiEquipmentRental:
+      type: object
+      properties:
+        person:
+          $ref: '#/components/schemas/Person'
+        skiEquipment:
+          $ref: '#/components/schemas/SkiEquipment'
+    PaymentCard:
+      type: object
+      properties:
+        name:
+          type: string
+        validTo:
+          type: string
+        number:
+          type: string
+    BuySkiPassRequest:
+      type: object
+      properties:
+        person:
+          $ref: '#/components/schemas/Person'
+        skiPass:
+          $ref: '#/components/schemas/SkiPass'
+    RentSkiEquipmentRequest:
+      type: object
+      properties:
+        skiEquipmentRental:
+          $ref: '#/components/schemas/SkiEquipmentRental'
+    BookTripRequest:
+      type: object
+      properties:
+        person:
+          $ref: '#/components/schemas/Person'
+        skiPass:
+          $ref: '#/components/schemas/SkiPass'
+        skiEquipment:
+          $ref: '#/components/schemas/SkiEquipment'
+        paymentCard:
+          $ref: '#/components/schemas/PaymentCard'
+    ExceptionResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        message:
+          type: string

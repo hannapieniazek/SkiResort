@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book a Ski Trip</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        margin-top: 50px; 
+    }
+
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+
+    .card-title {
+        color: #343a40;
+    }
+
+    .form-label {
+        font-weight: 500;
+    }
+
+    .btn-primary {
+        background-color: #007bff; 
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
+</style>
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Book Your Ski Trip</h1>
+    <div class="card shadow p-4">
+    <form th:action="@{/book}" th:object="${bookTripRequest}" method="post">
+        <h2 class="mb-3">Personal Information</h2>
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name:</label>
+            <input type="text" id="firstName" class="form-control" th:field="*{person.firstName}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name:</label>
+            <input type="text" id="lastName" class="form-control" th:field="*{person.lastName}" required>
+        </div>
+
+        <h2 class="mb-3">Ski Pass</h2>
+        <div class="mb-3">
+            <label for="passType" class="form-label">Type:</label>
+            <select id="passType" class="form-select" th:field="*{skiPass.type}">
+                <option value="REGULAR">Regular</option>
+                <option value="DISCOUNTED">Discounted</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="skiPassDuration" class="form-label">Duration:</label>
+            <select id="skiPassDuration" class="form-select" th:field="*{skiPass.duration}">
+                <option value="1 hour">1 hour</option>
+                <option value="2 hours">2 hours</option>
+                <option value="3 hours">3 hours</option>
+                <option value="5 hours">5 hours</option>
+                <option value="1 day">1 day</option>
+                <option value="3 days">3 days</option>
+                <option value="5 days">5 days</option>
+                <option value="1 week">1 week</option>
+                <option value="2 weeks">2 weeks</option>
+            </select>
+        </div>
+
+        <h2 class="mb-3">Ski Equipment</h2>
+        <div class="mb-3">
+            <label for="equipmentType" class="form-label">Type:</label>
+            <select id="equipmentType" class="form-select" th:field="*{skiEquipment.equipmentType}">
+                <option value="Skis">Skis</option>
+                <option value="Snowboard">Snowboard</option>
+                <option value="Boots">Boots</option>
+                <option value="Poles">Poles</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="rentalDuration" class="form-label">Rental Duration:</label>
+            <select id="rentalDuration" class="form-select" th:field="*{skiEquipment.rentalDuration}">
+                <option value="1 day">1 day</option>
+                <option value="2 days">2 days</option>
+                <option value="3 days">3 days</option>
+                <option value="1 week">1 week</option>
+                <option value="2 weeks">2 weeks</option>
+            </select>
+        </div>
+
+        <h2 class="mb-3">Payment Information</h2>
+        <div class="mb-3">
+            <label for="cardName" class="form-label">Card Name:</label>
+            <input type="text" id="cardName" class="form-control" th:field="*{paymentCard.name}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="cardNumber" class="form-label">Card Number:</label>
+            <input type="text" id="cardNumber" class="form-control" th:field="*{paymentCard.number}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="cardValidTo" class="form-label">Valid To:</label>
+            <input type="text" id="cardValidTo" class="form-control" th:field="*{paymentCard.validTo}" required>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg">Book Trip</button>
+        </div>
+    </form>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
